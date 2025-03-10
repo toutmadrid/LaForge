@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from users.models import User
 
 # Modèle Offre (capacité industrielle)
 class Offer(models.Model):
