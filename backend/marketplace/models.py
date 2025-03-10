@@ -1,12 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Modèle utilisateur personnalisé (optionnel mais recommandé)
-class User(AbstractUser):
-    is_buyer = models.BooleanField(default=False)
-    is_supplier = models.BooleanField(default=False)
-    company_name = models.CharField(max_length=100, blank=True, null=True)
-
 # Modèle Offre (capacité industrielle)
 class Offer(models.Model):
     supplier = models.ForeignKey(User, on_delete=models.CASCADE)
