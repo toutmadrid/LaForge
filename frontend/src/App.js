@@ -1,6 +1,7 @@
 import React from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
+import Offers from './components/Offers';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <h1 className="text-3xl font-bold">Authentification MarketPlace</h1>
       <Register />
       <Login />
+      <Offers />
     </div>
   );
 }
