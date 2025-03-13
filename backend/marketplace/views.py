@@ -1,3 +1,15 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django_elasticsearch_dsl.search import Search
+from .documents import OfferDocument
+
+class OfferSearchView(APIView):
+
+    def get(self, request):
+        query = self.request.query_params.get('q', '')
+        search = OfferDocument.search().query('multi_match', query=query, fields=['title', 'description', 'location', 'certifications'])
+        results = search.execute()
+        return Response(results.to_dict())
 
 # Create your views here.
 from rest_framework import generics, filters

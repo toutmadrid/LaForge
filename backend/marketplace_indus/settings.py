@@ -147,3 +147,10 @@ REST_FRAMEWORK = {
 }
 
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    }
+}
+
+INSTALLED_APPS += ['django_elasticsearch_dsl']
