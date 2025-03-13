@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +153,3 @@ ELASTICSEARCH_DSL = {
         'hosts': 'localhost:9200'
     }
 }
-
-INSTALLED_APPS += ['django_elasticsearch_dsl']
