@@ -2,6 +2,7 @@ import React from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
 import Offers from './components/Offers';
+import ElasticsearchSearch from './components/ElasticsearchSearch';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Register />
       <Login />
       <Offers />
+      <ElasticsearchSearch />
     </div>
   );
 }
