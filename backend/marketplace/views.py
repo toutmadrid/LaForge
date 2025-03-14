@@ -66,3 +66,17 @@ class CreateOrderFromQuotationView(APIView):
                 return Response({'detail': 'Commande déjà existante'}, status=status.HTTP_400_BAD_REQUEST)
         except Quotation.DoesNotExist:
             return Response({'detail': 'Devis non trouvé ou non accepté'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+class PaymentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, order_id):
+        try:
+            order = Order.objects.get(id=order_id, buyer=request.user, status='pending')
+            order.status = 'processing'
+            order.save()
+            return Response({'message': 'Paiement réussi, commande en cours !'}, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+            return Response({'detail': 'Commande introuvable ou déjà payée'}, status=status.HTTP_404_NOT_FOUND)

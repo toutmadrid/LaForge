@@ -17,3 +17,9 @@ from .views import CreateOrderFromQuotationView
 urlpatterns += [
     path('orders/create/<int:quotation_id>/', CreateOrderFromQuotationView.as_view(), name='create-order'),
 ]
+
+from .views import PaymentView
+
+urlpatterns += [
+    path('orders/pay/<int:order_id>/', PaymentView.as_view(), name='pay-order'),
+]
