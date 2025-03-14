@@ -18,6 +18,8 @@ class QuotationSerializer(serializers.ModelSerializer):
         model = Quotation
         fields = '__all__'
 
+from .models import Order
+
 class OrderSerializer(serializers.ModelSerializer):
     buyer = serializers.StringRelatedField(read_only=True)
     quotation = QuotationSerializer(read_only=True)
