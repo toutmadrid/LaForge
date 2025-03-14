@@ -31,3 +31,16 @@ class OfferDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OfferSerializer
     permission_classes = [IsAuthenticated]
 
+from rest_framework.permissions import IsAuthenticated
+from .models import Quotation, Offer
+from .serializers import QuotationSerializer
+from rest_framework import generics
+
+class CreateQuotationView(generics.CreateAPIView):
+    serializer_class = QuotationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        offer = Offer.objects.get(id=self.request.data['offer_id'])
+        serializer.save(buyer=self.request.user, offer=offer)
+

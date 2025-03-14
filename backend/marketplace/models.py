@@ -28,3 +28,17 @@ class Order(models.Model):
         return f'Order {self.id} - {self.status}'
 
 # Create your models here.
+class Quotation(models.Model):
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quotations')
+    offer = models.ForeignKey(Offer, on_delete=models.CASCADE, related_name='quotations')
+    quantity = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    status = models.CharField(max_length=50, default='pending')  # pending, accepted, rejected
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.quantity * self.offer.price_per_unit
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Devis {self.id} - {self.offer.title}'
