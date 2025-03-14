@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import CreateQuotation from './CreateQuotation';
 
 function Offers() {
   const [offers, setOffers] = useState([]);
@@ -9,6 +10,14 @@ function Offers() {
       .then((res) => setOffers(res.data))
       .catch(err => console.error(err));
   }, []);
+
+  {offers.map((offer) => (
+    <div key={offer.id} className="border p-4 rounded shadow">
+      <h3 className="font-bold">{offer.title}</h3>
+      <p>{offer.description}</p>
+      <CreateQuotation offerId={offer.id} />
+    </div>
+  ))}
 
   return (
     <div className="p-4">
@@ -27,7 +36,9 @@ function Offers() {
         ))}
       </div>
     </div>
+    
   );
 }
+
 
 export default Offers;
