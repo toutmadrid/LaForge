@@ -17,3 +17,11 @@ class QuotationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quotation
         fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    buyer = serializers.StringRelatedField(read_only=True)
+    quotation = QuotationSerializer(read_only=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'

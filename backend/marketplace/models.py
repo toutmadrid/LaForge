@@ -17,15 +17,14 @@ class Offer(models.Model):
 
 # Modèle Commande
 class Order(models.Model):
-    buyer = models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE)
-    offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=50, default='pending') # pending, confirmed, completed
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    quotation = models.OneToOneField('Quotation', on_delete=models.CASCADE, related_name='order')
+    status = models.CharField(max_length=50, default='pending')  # pending, processing, delivered
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Order {self.id} - {self.status}'
+        return f'Commande {self.id} - {self.status}'
+
 
 # Create your models here.
 class Quotation(models.Model):
