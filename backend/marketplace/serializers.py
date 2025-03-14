@@ -27,3 +27,13 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+from .models import Dispute
+
+class DisputeSerializer(serializers.ModelSerializer):
+    buyer = serializers.StringRelatedField(read_only=True)
+    order = OrderSerializer(read_only=True)
+
+    class Meta:
+        model = Dispute
+        fields = '__all__'

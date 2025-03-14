@@ -41,3 +41,14 @@ class Quotation(models.Model):
 
     def __str__(self):
         return f'Devis {self.id} - {self.offer.title}'
+
+
+class Dispute(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='disputes')
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    reason = models.TextField()
+    status = models.CharField(max_length=50, default='open')  # open, resolved, closed
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Litige {self.id} - Commande {self.order.id}'

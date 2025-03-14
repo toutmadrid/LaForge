@@ -80,3 +80,21 @@ class PaymentView(APIView):
             return Response({'message': 'Paiement réussi, commande en cours !'}, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
             return Response({'detail': 'Commande introuvable ou déjà payée'}, status=status.HTTP_404_NOT_FOUND)
+
+from .models import Dispute
+from .serializers import DisputeSerializer
+
+class CreateDisputeView(generics.CreateAPIView):
+    serializer_class = DisputeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        order = Order.objects.get(id=self.request.data['order_id'], buyer=self.request.user)
+        serializer.save(buyer=self.request.user, order=order)
+
+class ListUserDisputesView(generics.ListAPIView):
+    serializer_class = DisputeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Dispute.objects.filter(buyer=self.request.user)

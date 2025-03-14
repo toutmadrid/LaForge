@@ -23,3 +23,10 @@ from .views import PaymentView
 urlpatterns += [
     path('orders/pay/<int:order_id>/', PaymentView.as_view(), name='pay-order'),
 ]
+
+from .views import CreateDisputeView, ListUserDisputesView
+
+urlpatterns += [
+    path('disputes/create/', CreateDisputeView.as_view(), name='create-dispute'),
+    path('disputes/my/', ListUserDisputesView.as_view(), name='my-disputes'),
+]
