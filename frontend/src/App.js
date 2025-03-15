@@ -1,25 +1,40 @@
+// App.jsx
 import React from 'react';
-import Register from './components/Register';
-import Login from './components/Login';
-import Offers from './components/Offers';
-import ElasticsearchSearch from './components/ElasticsearchSearch';
-import DisputeForm from './components/DisputeForm';
-import MyDisputes from './components/MyDisputes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Importation de tes pages
+import Home from './Pages/Home';
+import Marketplace from './Pages/Marketplace';
+import ProductDetail from './Pages/ProductDetail';
+import Dashboard from './Pages/Dashboard';
+import SupplierDashboard from './Pages/SupplierDashboard';
+import Checkout from './Pages/checkout';
+import ContractManagement from './Pages/ContratManagement';
+import DisputeManagement from './Pages/DisputeManagement';
+import BlogPage from './Pages/BlogPage';
+import AboutContactPage from './Pages/AboutContactPage';
+import FAQAndLegalPage from './Pages/FAQAndLegalPage';
+import AdminDashboard from './Pages/AdminDashboard';
 
 function App() {
   return (
-    <div className="container mx-auto p-4 space-y-8">
-      <h1 className="text-3xl font-bold">Authentification MarketPlace</h1>
-      <Register />
-      <Login />
-      <Offers />
-      <ElasticsearchSearch />
-      <h1 className="text-2xl font-bold">Gestion Litiges</h1>
-      <DisputeForm orderId={1} /> {/* Remplace avec l'orderId dynamique */}
-      <MyDisputes />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/produit/:id" element={<ProductDetail />} />
+        <Route path="/espace-utilisateur" element={<Dashboard />} />
+        <Route path="/espace-fournisseur" element={<SupplierDashboard />} />
+        <Route path="/panier" element={<Checkout />} />
+        <Route path="/gestion-contrats" element={<ContractManagement />} />
+        <Route path="/gestion-litiges" element={<DisputeManagement />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/a-propos-contact" element={<AboutContactPage />} />
+        <Route path="/faq-mentions-legales" element={<FAQAndLegalPage />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-
